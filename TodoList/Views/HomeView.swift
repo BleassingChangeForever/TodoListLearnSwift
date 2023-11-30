@@ -10,15 +10,7 @@ import SwiftUI
 struct HomeView: View {
     
     
-    @State var data :[ItemModel] = [
-    
-        ItemModel(title: "This is the frist title", isValidade: true),
-        
-        ItemModel(title: "This is the secound title", isValidade: true),
-        
-        ItemModel(title: "This is the 3 title", isValidade: false)
-        
-    ]
+    @ObservedObject var data  = ModelHomeView()
     
     
     var body: some View {
@@ -27,25 +19,33 @@ struct HomeView: View {
             
             List {
                 
-                ForEach(data) { lista  in
+                ForEach(data.lista_objecto) { lista  in
                     
                     ListViewItem(modelo: lista)
 
-                }
+                }.onDelete(perform: data.eliminar)
+                    .onMove (perform: data.editar)
                 
                 
                 
                 
-            }.navigationTitle("Todo List ✨")
+            }
+            
+            
+            .navigationTitle("Todo List ✨")
                 .navigationBarItems(leading: EditButton(), trailing: NavigationLink("Add", destination: {
                     
                     AddNewItem()
                 }))
+                
+                
             
             
         }
 
     }
+    
+    
 }
 
 struct HomeView_Previews: PreviewProvider {
