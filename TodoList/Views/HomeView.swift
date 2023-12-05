@@ -10,7 +10,8 @@ import SwiftUI
 struct HomeView: View {
     
     
-    @ObservedObject var data  = ModelHomeView()
+    @EnvironmentObject var lista:ModelListView
+
     
     
     var body: some View {
@@ -19,12 +20,12 @@ struct HomeView: View {
             
             List {
                 
-                ForEach(data.lista_objecto) { lista  in
+                ForEach(lista.lista_objecto) { lista  in
                     
                     ListViewItem(modelo: lista)
 
-                }.onDelete(perform: data.eliminar)
-                    .onMove (perform: data.editar)
+                }.onDelete(perform: lista.eliminar)
+                    .onMove (perform: lista.editar)
                 
                 
                 
@@ -50,7 +51,9 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        NavigationView {
+            HomeView()
+        }.environmentObject(ModelListView())
     }
 }
 

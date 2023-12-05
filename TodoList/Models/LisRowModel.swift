@@ -11,7 +11,12 @@ struct ItemModel:Identifiable {
     
     let id :String = UUID().uuidString
     let title:String
-    let isValidade: Bool
+    var isValidade: Bool
+    
+    
+    
+    
+    
 }
 
 

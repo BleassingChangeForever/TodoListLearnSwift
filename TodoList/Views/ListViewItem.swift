@@ -9,13 +9,20 @@ import SwiftUI
 
 struct ListViewItem: View {
     
-     let modelo :ItemModel
+    var modelo :ItemModel
     var body: some View {
         HStack {
-            Image(systemName: modelo.isValidade ?  "checkmark.circle" : "circle")
-                .foregroundColor(modelo.isValidade ? .green : .black)
-            Text(modelo.title)
-            Spacer()
+            
+            Button {
+                modelo.isValidade.toggle()
+            } label: {
+                Image(systemName: modelo.isValidade ?  "checkmark.circle" : "circle")
+                    .foregroundColor(modelo.isValidade ? .green : .black)
+                Text(modelo.title)
+                Spacer()
+            }
+
+            
             
         }
     }
